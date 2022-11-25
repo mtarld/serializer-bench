@@ -1,26 +1,39 @@
 <?php
 
-namespace Soyuka;
+namespace App;
 
-use Soyuka\Dto\Collection;
-use Soyuka\Dto\Element;
-use Soyuka\Dto\Relation;
+use App\Dto\Element;
+use App\Dto\Relation;
 
 class DataBuilder
 {
-    static Collection $data;
+    public static array $data;
+    public static int $num = 10000;
 
-    static public function build(): void {
+    public static function build(): void
+    {
         $relations = [];
-        for ($i = 0; $i < 1000; $i++) {
-            $relations[] = new Relation(id: $i, value: bin2hex(random_bytes(10)), createdAt: new \DateTimeImmutable());
+        $now = new \DateTimeImmutable();
+
+        for ($i = 0; $i < self::$num / 10; $i++) {
+            $relation = new Relation();
+            $relation->id = $i;
+            $relation->value = bin2hex(random_bytes(10));
+            $relation->createdAt = $now;
+
+            $relations[] = $relation;
         }
 
-        $collection = [];
-        for ($i = 0; $i < 10000; $i++) {
-            $collection[] = new Element(id: $i, price: (float) sprintf('%s.%s', random_int(1, 100), random_int(1, 10)), relation: $relations[array_rand($relations)]);
+        $elements = [];
+        for ($i = 0; $i < self::$num; $i++) {
+            $element = new Element();
+            $element->id = $i;
+            $element->price = (float) sprintf('%s.%s', random_int(1, 100), random_int(1, 10));
+            $element->relation = $relations[array_rand($relations)];
+
+            $elements[] = $element;
         }
 
-        static::$data = new Collection($collection);
+        static::$data = $elements;
     }
 }

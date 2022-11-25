@@ -1,8 +1,12 @@
 <?php
 
-namespace Soyuka\Dto;
+namespace App\Dto;
 
+#[Marshallable]
 class Element
 {
-    public function __construct(public int $id, public float $price, public Relation $relation) {}
+    public ?int $id = null;
+    public ?float $price = null;
+    /** @var Relation|null */
+    public mixed $relation = null;
 }

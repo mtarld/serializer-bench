@@ -1,28 +1,31 @@
 {
-    "name": "soyuka/serializer-benchmarks",
+    "name": "mtarld/serializer-benchmark",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {"type": "path", "url": "../symfony/src/Symfony/Component/JsonMarshaller/"}
+    ],
+    "require": {
+        "symfony/serializer": "*",
+        "symfony/property-access": "*",
+        "symfony/console": "^6.3",
+        "symfony/json-marshaller": "*",
+        "phpstan/phpdoc-parser": "^1.23",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "symfony/var-exporter": "*",
+        "symfony/cache": "7.0.x-dev"
+    },
     "require-dev": {
-        "phpbench/phpbench": "^1.0"
+        "phpbench/phpbench": "^1.2"
     },
     "autoload": {
         "psr-4": {
-            "Soyuka\\": "src/"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Soyuka\\Tests\\": "tests/"
+            "App\\Tests\\": "tests/"
         }
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../marshaller/components/Marshaller"
-        }
-    ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "require": {
-        "api-platform/core": "^3.0",
-        "symfony/marshaller": "*"
     }
 }
